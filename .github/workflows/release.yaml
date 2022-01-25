@@ -17,8 +17,8 @@ jobs:
       - name: Build
         run: |
           git clone https://github.com/forkstuffs/flutter_acrylic.git
-          git clone https://${{ secrets.P_TOKEN }}@github.com/infumia/netlords_launcher.git
-          cd netlords_launcher
+          git clone https://${{ secrets.P_TOKEN }}@github.com/infumia/tuna.git
+          cd tuna
           flutter config --enable-windows-desktop
           flutter build windows --dart-define="build_id=${{ github.event.release.tag_name }}" --dart-define="version=${{ github.event.release.tag_name }}"
           flutter pub run msix:create --v ${{ github.event.release.tag_name }}.0
@@ -26,30 +26,30 @@ jobs:
           git clone https://github.com/infumia/flutter_updater.git
           cd flutter_updater
           dart pub get
-          cd ${{ github.workspace }}\netlords_launcher\build\windows\runner\Release\
+          cd ${{ github.workspace }}\tuna\build\windows\runner\Release\
           cd ${{ github.workspace }}\flutter_updater
-          dart compile exe lib/main.dart --output ${{ github.workspace }}\netlords_launcher\build\windows\runner\Release\updater.exe
+          dart compile exe lib/main.dart --output ${{ github.workspace }}\tuna\build\windows\runner\Release\updater.exe
           cd ${{ github.workspace }}
           mkdir win-build
-          copy ${{ github.workspace }}\netlords_launcher\build\windows\runner\Release\netlords_launcher.msix win-build
-          copy ${{ github.workspace }}\netlords_launcher\assets\certificate.pfx win-build
-          copy ${{ github.workspace }}\netlords_launcher\assets\install.bat win-build
+          copy ${{ github.workspace }}\tuna\build\windows\runner\Release\netlords_launcher.msix win-build
+          copy ${{ github.workspace }}\tuna\assets\certificate.pfx win-build
+          copy ${{ github.workspace }}\tuna\assets\install.bat win-build
 
       - name: Zip Windows 10
         uses: thedoctor0/zip-release@master
         with:
           path: win-build\.
-          filename: 'NetLordsLauncher-${{ github.event.release.tag_name }}-win10.zip'
+          filename: 'tuna-win10.zip'
 
       - name: Zip Windows 7
         uses: thedoctor0/zip-release@master
         with:
-          path: ${{ github.workspace }}\netlords_launcher\build\windows\runner\Release\.
-          filename: 'NetLordsLauncher-${{ github.event.release.tag_name }}-win7.zip'
+          path: ${{ github.workspace }}\tuna\build\windows\runner\Release\.
+          filename: 'tuna-win7.zip'
           exclusions: '*.msix'
 
       - uses: softprops/action-gh-release@v1
         with:
           files: |
-            NetLordsLauncher-${{ github.event.release.tag_name }}-win7.zip
-            NetLordsLauncher-${{ github.event.release.tag_name }}-win10.zip
+            tuna-win7.zip
+            tuna-win10.zip
