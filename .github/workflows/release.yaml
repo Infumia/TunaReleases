@@ -31,7 +31,7 @@ jobs:
           dart compile exe lib/main.dart --output ${{ github.workspace }}\tuna\build\windows\runner\Release\updater.exe
           cd ${{ github.workspace }}
           mkdir win-build
-          copy ${{ github.workspace }}\tuna\build\windows\runner\Release\netlords_launcher.msix win-build
+          copy ${{ github.workspace }}\tuna\build\windows\runner\Release\tuna.msix win-build
           copy ${{ github.workspace }}\tuna\assets\certificate.pfx win-build
           copy ${{ github.workspace }}\tuna\assets\install.bat win-build
 
