@@ -16,7 +16,6 @@ jobs:
 
       - name: Build
         run: |
-          git clone https://github.com/forkstuffs/flutter_acrylic.git
           git clone https://${{ secrets.P_TOKEN }}@github.com/infumia/tuna.git
           cd tuna
           flutter config --enable-windows-desktop
