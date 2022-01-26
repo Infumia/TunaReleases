@@ -8,11 +8,11 @@ jobs:
   windows:
     runs-on: windows-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout
+        uses: actions/checkout@master
 
-      - uses: subosito/flutter-action@master
-        with:
-          channel: master
+      - name: Setup Flutter
+        uses: hrishikesh-kadam/setup-flutter@v1
 
       - name: Build
         run: |
@@ -47,7 +47,8 @@ jobs:
           filename: 'tuna-win7.zip'
           exclusions: '*.msix'
 
-      - uses: softprops/action-gh-release@v1
+      - name: Upload files
+        uses: softprops/action-gh-release@v1
         with:
           files: |
             tuna-win7.zip
