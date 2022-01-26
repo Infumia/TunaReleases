@@ -20,7 +20,7 @@ jobs:
           cd tuna
           flutter config --enable-windows-desktop
           flutter build windows --dart-define="build_id=${{ github.event.release.tag_name }}" --dart-define="version=${{ github.event.release.tag_name }}"
-          flutter pub run msix:create --v ${{ github.event.release.tag_name }}.0
+          flutter pub run msix:create --version ${{ github.event.release.tag_name }}.0
           cd ..
           git clone https://github.com/infumia/flutter_updater.git
           cd flutter_updater
