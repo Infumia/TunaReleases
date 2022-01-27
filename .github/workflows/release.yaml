@@ -25,11 +25,10 @@ jobs:
           git clone https://github.com/infumia/flutter_updater.git
           cd flutter_updater
           dart pub get
-          cd ${{ github.workspace }}\tuna\build\windows\runner\Release\
-          cd ${{ github.workspace }}\flutter_updater
           dart compile exe lib/main.dart --output ${{ github.workspace }}\tuna\build\windows\runner\Release\updater.exe
           cd ${{ github.workspace }}
           mkdir win-build
+          copy ${{ github.workspace }}\tuna\build\windows\runner\Release\updater.exe win-build
           copy ${{ github.workspace }}\tuna\build\windows\runner\Release\tuna.msix win-build
           copy ${{ github.workspace }}\tuna\assets\certificate.pfx win-build
           copy ${{ github.workspace }}\tuna\assets\install.bat win-build
